@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Dancing+Script:wght@400;700&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+  --font-signature: "Dancing Script", cursive;
+  
+  --color-primary: #ff7a00;
+  --color-accent: #ff7a00;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-reveal: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes reveal {
+    0% { transform: translateY(100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-black text-white selection:bg-primary/30 selection:text-primary;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+.text-huge {
+  @apply text-[clamp(3.5rem,12vw,10rem)] leading-[0.85] font-display font-extrabold uppercase tracking-tighter;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  color: transparent;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+}
+
+.signature {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full hover:bg-primary transition-colors;
+}
+
+.orange-glow {
+  box-shadow: 0 0 50px -10px rgba(255, 122, 0, 0.3);
+}
+
+.noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.05;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
