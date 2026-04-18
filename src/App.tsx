@@ -471,24 +471,21 @@ const Projects = () => {
       category: "Architecture & Design",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000",
       year: "2026",
-      description: "Modern architecture & interior design website with premium UI and smooth animations.",
-      link: "https://ai.studio/apps/6b0209ce-2d69-4b7f-8525-1b82a35dbdcc"
+      description: "Modern architecture & interior design website with premium UI and smooth animations."
     },
     {
       title: "InstaSenti",
       category: "AI & Sentiment Analysis",
       image: "https://lh3.googleusercontent.com/d/1gRQcwR_kG02Njh6vVfDTsNIvBzLv_FP8",
       year: "2026",
-      description: "Instagram Sentiment Analyzer - Deciphering social pulse with AI and 3D data visualizations.",
-      link: "https://ai.studio/apps/7c1fa3d4-6f7c-4005-813e-e54a16143ac0"
+      description: "Instagram Sentiment Analyzer - Deciphering social pulse with AI and 3D data visualizations."
     },
     {
       title: "AI Resume Checker",
       category: "AI & Productivity",
       image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=2000",
       year: "2026",
-      description: "Intelligent AI Resume Analyzer - Providing instant feedback and optimization tips using LLMs.",
-      link: "https://ai.studio/apps/drive/1oxqUJ1rbkUjog1huGHYSc850Ln_DsK-e"
+      description: "Intelligent AI Resume Analyzer - Providing instant feedback and optimization tips using LLMs."
     },
   ];
 
@@ -510,11 +507,8 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-2 gap-x-12 gap-y-24">
           {projects.map((project, i) => (
-            <motion.a
+            <motion.div
               key={i}
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -531,8 +525,8 @@ const Projects = () => {
                   referrerPolicy="no-referrer"
                 />
                 
-                {/* Visual Overlay on Hover */}
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                {/* Visual Overlay Design */}
+                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
                 <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-md px-4 py-2 text-[10px] font-bold tracking-widest uppercase text-white border border-white/10 z-10">
                   {project.year}
@@ -540,18 +534,15 @@ const Projects = () => {
               </div>
               
               <div className="flex justify-between items-start">
-                <div className="flex-1 mr-4">
+                <div className="flex-1">
                   <span className="text-primary text-[10px] font-bold uppercase tracking-widest mb-2 block">{project.category}</span>
                   <h3 className="text-3xl font-display font-bold group-hover:text-primary transition-colors mb-4">{project.title}</h3>
                   <p className="text-white/40 text-sm leading-relaxed max-w-sm group-hover:text-white/60 transition-colors">
                     {project.description}
                   </p>
                 </div>
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:border-primary shrink-0 transition-all duration-300 translate-y-2">
-                  <ArrowUp className="rotate-45 text-white group-hover:text-black transition-colors" size={20} />
-                </div>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </div>
       </div>
