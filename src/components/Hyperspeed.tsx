@@ -435,9 +435,9 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }: HyperspeedProps)
         this.bloomPass = new EffectPass(
             this.camera,
             new BloomEffect({
-              luminanceThreshold: 0.2,
-              luminanceSmoothing: 0,
-              resolutionScale: 1
+              luminanceThreshold: 0.4,
+              luminanceSmoothing: 0.1,
+              resolutionScale: 0.5
             })
           );
 
@@ -476,18 +476,10 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }: HyperspeedProps)
       }
 
       initPasses() {
-        const smaaPass = new EffectPass(
-          this.camera,
-          new SMAAEffect({
-            preset: SMAAPreset.MEDIUM
-          } as any)
-        );
         this.renderPass.renderToScreen = false;
-        this.bloomPass.renderToScreen = false;
-        smaaPass.renderToScreen = true;
+        this.bloomPass.renderToScreen = true;
         this.composer.addPass(this.renderPass);
         this.composer.addPass(this.bloomPass);
-        this.composer.addPass(smaaPass);
       }
 
       loadAssets() {

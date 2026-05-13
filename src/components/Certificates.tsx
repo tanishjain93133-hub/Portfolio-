@@ -103,8 +103,8 @@ export default function Certificates() {
   return (
     <div className="min-h-screen pt-40 pb-24 relative bg-black">
       {/* Background Glows */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 blur-[150px] -z-10" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 blur-[150px] -z-10" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[100px] -z-10" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 blur-[100px] -z-10" />
 
       <div className="container mx-auto px-6">
         <motion.div 
@@ -193,14 +193,14 @@ export default function Certificates() {
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
           >
             <div 
-              className="absolute inset-0 bg-black/95 backdrop-blur-md" 
+              className="absolute inset-0 bg-black/90" 
               onClick={() => setSelectedCert(null)}
             />
             
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
               className="relative w-full max-w-6xl bg-black border border-white/10 overflow-hidden z-10"
             >
               <button 

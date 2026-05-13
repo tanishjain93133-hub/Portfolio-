@@ -1,5 +1,5 @@
-import { motion, useScroll, useSpring } from 'motion/react';
-import { useEffect, useState, useMemo } from 'react';
+import { motion, useScroll, useSpring, useMotionValue } from 'motion/react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { 
   Menu, X, Github, Linkedin, Twitter, ArrowUp, Instagram, 
   TrendingUp, Layout, BarChart3, Video, Cpu, Search, Code, PieChart 
@@ -52,7 +52,7 @@ const Navbar = ({ activePage, setActivePage }: { activePage: string; setActivePa
   return (
     <nav className={cn(
       "fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 py-6",
-      isScrolled ? "bg-black/80 backdrop-blur-md py-4 border-b border-white/5" : "bg-transparent"
+      isScrolled ? "bg-black/90 py-4 border-b border-white/5" : "bg-transparent"
     )}>
       <div className="max-w-[1800px] mx-auto flex justify-between items-center">
         <motion.button 
@@ -131,13 +131,13 @@ const Hero = () => {
     length: 400,
     roadWidth: 10,
     islandWidth: 2,
-    lanesPerRoad: 4,
+    lanesPerRoad: 2,
     fov: 90,
-    fovSpeedUp: 150,
-    speedUp: 2,
+    fovSpeedUp: 120,
+    speedUp: 1.5,
     carLightsFade: 0.4,
-    totalSideLightSticks: 20,
-    lightPairsPerRoadWay: 40,
+    totalSideLightSticks: 10,
+    lightPairsPerRoadWay: 20,
     shoulderLinesWidthPercentage: 0.005,
     brokenLinesWidthPercentage: 0.1,
     brokenLinesLengthPercentage: 0.5,
@@ -375,7 +375,7 @@ const Skills = () => {
   return (
     <section id="skills" className="py-40 bg-black relative overflow-hidden">
       {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-primary/5 blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 blur-[120px] pointer-events-none" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-12">
@@ -405,12 +405,12 @@ const Skills = () => {
           {skills.map((skill, i) => (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="relative p-10 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary/50 transition-all duration-500 group overflow-hidden rounded-2xl"
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              whileHover={{ y: -5 }}
+              className="relative p-10 bg-zinc-900/40 border border-white/5 hover:border-primary/30 transition-all duration-300 group overflow-hidden rounded-2xl"
             >
               {/* Large Faded Number */}
               <div className="absolute -bottom-6 -right-6 text-[10rem] font-display font-black text-white/[0.02] leading-none pointer-events-none group-hover:text-primary/[0.04] transition-colors duration-700">
@@ -445,15 +445,8 @@ const Skills = () => {
                     </span>
                   </div>
                   
-                  {/* Animated Glowing Dot */}
-                  <motion.div 
-                    animate={{ 
-                      scale: [1, 1.5, 1],
-                      opacity: [0.4, 0.8, 0.4]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-1.5 h-1.5 bg-primary rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
-                  />
+                  {/* Subtle Indicator */}
+                  <div className="w-1.5 h-1.5 bg-primary/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
               </div>
             </motion.div>
@@ -469,23 +462,24 @@ const Projects = () => {
     {
       title: "DSA Architecture Website",
       category: "Architecture & Design",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200",
       year: "2026",
-      description: "Modern architecture & interior design website with premium UI and smooth animations."
+      description: "Modern architecture & interior design website with premium UI and smooth animations.",
+      link: "https://dsa-2.vercel.app/"
     },
     {
       title: "InstaSenti",
       category: "AI & Sentiment Analysis",
       image: "https://lh3.googleusercontent.com/d/1gRQcwR_kG02Njh6vVfDTsNIvBzLv_FP8",
       year: "2026",
-      description: "Instagram Sentiment Analyzer - Deciphering social pulse with AI and 3D data visualizations."
+      description: "Instagram Sentiment Analyzer - Deciphering social pulse with AI and 3D data visualizations.",
     },
     {
       title: "AI Resume Checker",
       category: "AI & Productivity",
-      image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=2000",
+      image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=1200",
       year: "2026",
-      description: "Intelligent AI Resume Analyzer - Providing instant feedback and optimization tips using LLMs."
+      description: "Intelligent AI Resume Analyzer - Providing instant feedback and optimization tips using LLMs.",
     },
   ];
 
@@ -506,44 +500,59 @@ const Projects = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-x-12 gap-y-24">
-          {projects.map((project, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group"
-            >
-              <div className="relative overflow-hidden mb-8 aspect-[16/10] bg-zinc-900/50 border border-white/5 flex items-center justify-center">
-                <motion.img 
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-contain transition-all duration-700"
-                  referrerPolicy="no-referrer"
-                />
-                
-                {/* Visual Overlay Design */}
-                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                
-                <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-md px-4 py-2 text-[10px] font-bold tracking-widest uppercase text-white border border-white/10 z-10">
-                  {project.year}
+          {projects.map((project, i) => {
+            const CardWrapper = project.link ? motion.a : motion.div;
+            const wrapperProps = project.link ? {
+              href: project.link,
+              target: "_blank",
+              rel: "noopener noreferrer"
+            } : {};
+
+            return (
+              <CardWrapper
+                key={i}
+                {...wrapperProps}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group block"
+              >
+                <div className="relative overflow-hidden mb-8 aspect-[16/10] bg-zinc-900/50 border border-white/5 flex items-center justify-center">
+                  <motion.img 
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-contain transition-all duration-700"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  {/* Visual Overlay Design */}
+                  <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  
+                  <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-md px-4 py-2 text-[10px] font-bold tracking-widest uppercase text-white border border-white/10 z-10">
+                    {project.year}
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <span className="text-primary text-[10px] font-bold uppercase tracking-widest mb-2 block">{project.category}</span>
-                  <h3 className="text-3xl font-display font-bold group-hover:text-primary transition-colors mb-4">{project.title}</h3>
-                  <p className="text-white/40 text-sm leading-relaxed max-w-sm group-hover:text-white/60 transition-colors">
-                    {project.description}
-                  </p>
+                
+                <div className="flex justify-between items-start">
+                  <div className="flex-1 mr-4">
+                    <span className="text-primary text-[10px] font-bold uppercase tracking-widest mb-2 block">{project.category}</span>
+                    <h3 className="text-3xl font-display font-bold group-hover:text-primary transition-colors mb-4">{project.title}</h3>
+                    <p className="text-white/40 text-sm leading-relaxed max-w-sm group-hover:text-white/60 transition-colors">
+                      {project.description}
+                    </p>
+                  </div>
+                  {project.link && (
+                    <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:border-primary shrink-0 transition-all duration-300 translate-y-2">
+                      <ArrowUp className="rotate-45 text-white group-hover:text-black transition-colors" size={20} />
+                    </div>
+                  )}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </CardWrapper>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -682,39 +691,43 @@ const Footer = () => {
 };
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const cursorX = useMotionValue(0);
+  const cursorY = useMotionValue(0);
   const [isPointer, setIsPointer] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
       const target = e.target as HTMLElement;
       setIsPointer(window.getComputedStyle(target).cursor === 'pointer');
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [cursorX, cursorY]);
 
   return (
     <>
       <motion.div
-        animate={{ 
-          x: position.x - 4, 
-          y: position.y - 4,
-          scale: isPointer ? 0 : 1
+        style={{ 
+          x: cursorX, 
+          y: cursorY,
+          translateX: '-50%',
+          translateY: '-50%',
+          scale: isPointer ? 0.5 : 1
         }}
-        transition={{ type: 'spring', damping: 30, stiffness: 500, mass: 0.5 }}
         className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-[9999] hidden md:block"
       />
       <motion.div
-        animate={{ 
-          x: position.x - 20, 
-          y: position.y - 20,
+        style={{ 
+          x: cursorX, 
+          y: cursorY,
+          translateX: '-50%',
+          translateY: '-50%',
           scale: isPointer ? 1.5 : 1,
-          borderColor: isPointer ? '#ff7a00' : 'rgba(255, 122, 0, 0.3)'
         }}
-        transition={{ type: 'spring', damping: 20, stiffness: 250, mass: 0.8 }}
-        className="fixed top-0 left-0 w-10 h-10 border border-primary/30 rounded-full pointer-events-none z-[9998] hidden md:block"
+        transition={{ type: 'spring', damping: 25, stiffness: 250, mass: 0.5 }}
+        className="fixed top-0 left-0 w-8 h-8 border border-primary/20 rounded-full pointer-events-none z-[9998] hidden md:block"
       />
     </>
   );
@@ -725,7 +738,7 @@ const Preloader = () => {
     <motion.div
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
-      transition={{ duration: 1, delay: 2.5 }}
+      transition={{ duration: 0.6, delay: 1.5 }}
       onAnimationComplete={() => document.body.style.overflow = 'auto'}
       className="fixed inset-0 z-[10000] bg-black flex items-center justify-center pointer-events-none"
     >
@@ -733,7 +746,7 @@ const Preloader = () => {
         <motion.h2 
           initial={{ y: 100 }}
           animate={{ y: 0 }}
-          transition={{ duration: 1, ease: "circOut" }}
+          transition={{ duration: 0.8, ease: "circOut" }}
           className="text-4xl font-display font-black tracking-tighter text-white uppercase"
         >
           TANISH JAIN<span className="text-primary">.</span>
