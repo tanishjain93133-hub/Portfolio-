@@ -620,6 +620,7 @@ const Projects = () => {
       techStack: ["HTML", "CSS", "JavaScript", "Responsive Design", "UI/UX", "Vercel"],
       link: "https://dsa-2.vercel.app/",
       demo: "https://dsa-2.vercel.app/",
+      github: "https://github.com/tanishjain93133-hub/DSA-2",
       isInteractive: true,
       isArchitecture: true
     },
@@ -640,7 +641,7 @@ const Projects = () => {
         "Trend Prediction"
       ],
       techStack: ["Python", "Streamlit", "Pandas", "Plotly", "Prophet", "NumPy"],
-      github: "https://github.com/tanishjain93133-hub/SalesVision-AI",
+      github: "https://github.com/tanishjain93133-hub/ai-sales-predict",
       link: "https://ai-sales-predict.streamlit.app/",
       demo: "https://ai-sales-predict.streamlit.app/",
       isInteractive: true
@@ -662,7 +663,7 @@ const Projects = () => {
         "Real-time Analysis"
       ],
       techStack: ["Python", "Streamlit", "NLP", "TextBlob", "Pandas", "Plotly"],
-      github: "https://github.com/tanishjain93133-hub/InstaSenti",
+      github: "https://github.com/tanishjain93133-hub/InstaSenti-",
       isInteractive: true,
       isSenti: true
     },
@@ -683,7 +684,7 @@ const Projects = () => {
         "Resume Optimization"
       ],
       techStack: ["Python", "Streamlit", "NLP", "Machine Learning", "Pandas", "Scikit-learn"],
-      github: "https://github.com/tanishjain93133-hub/Nexus-AI-Resume-Analyzer",
+      github: "https://github.com/tanishjain93133-hub/Nexus-AI-",
       isInteractive: true,
       isResume: true
     },
