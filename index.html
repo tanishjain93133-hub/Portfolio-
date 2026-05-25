@@ -4,6 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Google AI Studio App</title>
+    <script>
+      // Workaround for environments/iframes where window.fetch has only a getter or is non-writable.
+      // This prevents libraries (like formdata-polyfill) from throwing TypeErrors when patching fetch.
+      (function() {
+        try {
+          const original = window.fetch;
+          let current = original;
+          Object.defineProperty(window, 'fetch', {
+            get() { return current; },
+            set(v) { current = v; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          console.warn("Could not patch window.fetch setter: ", e);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

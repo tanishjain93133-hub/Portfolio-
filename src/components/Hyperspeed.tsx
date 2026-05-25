@@ -388,6 +388,13 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }: HyperspeedProps)
         });
         this.renderer.setSize(initW, initH, false);
         this.renderer.setPixelRatio(window.devicePixelRatio);
+        
+        // Force WebGL context initialization using a dummy scene and camera
+        // to prevent postprocessing composer from failing with null WebGLContext.
+        const dummyScene = new THREE.Scene();
+        const dummyCamera = new THREE.Camera();
+        this.renderer.render(dummyScene, dummyCamera);
+
         this.composer = new EffectComposer(this.renderer);
         container.append(this.renderer.domElement);
 
