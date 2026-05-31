@@ -618,8 +618,8 @@ const Projects = () => {
         "Premium Architecture Layout"
       ],
       techStack: ["HTML", "CSS", "JavaScript", "Responsive Design", "UI/UX", "Vercel"],
-      link: "https://dsa-2.vercel.app/",
-      demo: "https://dsa-2.vercel.app/",
+      link: "https://dsa-architects-and-interiors.vercel.app/",
+      demo: "https://dsa-architects-and-interiors.vercel.app/",
       github: "https://github.com/tanishjain93133-hub/DSA-2",
       isInteractive: true,
       isArchitecture: true
