@@ -1,7 +1,7 @@
 import { motion, useScroll, useSpring, useMotionValue } from 'motion/react';
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { 
-  Menu, X, Github, Linkedin, Twitter, ArrowUp, Instagram, 
+  Menu, X, Github, Linkedin, Twitter, ArrowUp, Instagram, MessageCircle,
   TrendingUp, Layout, BarChart3, Video, Cpu, Search, Code, PieChart,
   Check, Sparkles, ExternalLink, Sliders, Database, ArrowUpRight,
   FileText, Upload, RefreshCw
@@ -136,13 +136,16 @@ const Navbar = ({ activePage, setActivePage }: { activePage: string; setActivePa
               {link.name}
             </motion.button>
           ))}
-          <motion.button
+          <motion.a
+            href="https://wa.me/917049845357"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-2 rounded-full border border-primary text-primary text-[11px] uppercase tracking-widest font-bold hover:bg-primary hover:text-black transition-all"
+            className="px-6 py-2 rounded-full border border-primary text-primary text-[11px] uppercase tracking-widest font-bold hover:bg-primary hover:text-black transition-all inline-block text-center"
           >
             Let's Talk
-          </motion.button>
+          </motion.a>
         </div>
 
         {/* Mobile Toggle */}
@@ -170,6 +173,15 @@ const Navbar = ({ activePage, setActivePage }: { activePage: string; setActivePa
               {link.name}
             </button>
           ))}
+          <a
+            href="https://wa.me/917049845357"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-5xl font-display font-bold text-primary text-left uppercase tracking-tighter hover:text-primary-light transition-colors mt-4"
+          >
+            Let's Talk
+          </a>
         </motion.div>
       )}
     </nav>
@@ -315,7 +327,7 @@ const About = () => {
             <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative border border-white/10 p-4 bg-white/5 backdrop-blur-sm overflow-hidden rounded-2xl shadow-2xl group">
               <img 
-                src="https://lh3.googleusercontent.com/d/1mUfUWnG4ZWVFnxgOahSTXq_cJA2DGSh5" 
+                src="/images/portfolio/profile.jpg" 
                 alt="Tanish Jain" 
                 className="w-full h-auto rounded-xl grayscale hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100 shadow-lg"
                 referrerPolicy="no-referrer"
@@ -604,7 +616,7 @@ const Projects = () => {
     {
       title: "DSA – Dhwanish Shah Architects Website",
       category: "Architecture & Design",
-      image: "https://lh3.googleusercontent.com/d/1vv81q-n1jOzi1X9IcHI3sWcMqfy4PIBQ",
+      image: "/images/portfolio/dsa_architects.jpg",
       year: "2026",
       description: "Designed and developed a modern architecture and interior design website for Dhwanish Shah Architects featuring project showcases, client testimonials, dynamic galleries, YouTube review integration, and a premium user experience.",
       features: [
@@ -627,7 +639,7 @@ const Projects = () => {
     {
       title: "SalesVision AI – AI Sales Forecasting Dashboard",
       category: "AI & Data Science",
-      image: "https://lh3.googleusercontent.com/d/1tfmEw3WvATPTSo7FCgHNJDFhcKehQMvL",
+      image: "/images/portfolio/sales_vision.jpg",
       year: "2026",
       description: "An AI-powered sales analytics and forecasting dashboard that analyzes sales data, generates KPI insights, visualizes trends, and predicts future sales using machine learning techniques.",
       features: [
@@ -649,7 +661,7 @@ const Projects = () => {
     {
       title: "InstaSenti – AI Instagram Sentiment Analyzer",
       category: "AI & Sentiment Analysis",
-      image: "https://lh3.googleusercontent.com/d/1bXejSKeByBVi72knDcNOumnJbtUUO1k_",
+      image: "/images/portfolio/insta_senti.jpg",
       year: "2026",
       description: "An AI-powered Instagram comment sentiment analysis system that analyzes comments and classifies them into positive, negative, and neutral sentiments with interactive visual insights.",
       features: [
@@ -1891,6 +1903,14 @@ const Contact = () => {
                     <a href="tel:7049845357" className="block text-2xl font-display font-bold text-white/60 hover:text-primary transition-colors">
                       +91 7049845357
                     </a>
+                    <a 
+                      href="https://wa.me/917049845357" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block text-2xl font-display font-bold text-[#25D366] hover:text-[#128C7E] transition-colors"
+                    >
+                      WhatsApp: +91 7049845357
+                    </a>
                   </div>
                 </div>
 
@@ -1900,7 +1920,8 @@ const Contact = () => {
                     {[
                       { name: 'LinkedIn', href: 'https://www.linkedin.com/in/tanish-jain-324284271/' },
                       { name: 'GitHub', href: 'https://github.com/tanishjain93133-hub' },
-                      { name: 'Instagram', href: 'https://www.instagram.com/tanish__.6' }
+                      { name: 'Instagram', href: 'https://www.instagram.com/tanish__.6' },
+                      { name: 'WhatsApp', href: 'https://wa.me/917049845357' }
                     ].map((social) => (
                       <a 
                         key={social.name}
@@ -1967,7 +1988,8 @@ const SocialConnect = () => {
         {[
           { name: 'LinkedIn', href: 'https://www.linkedin.com/in/tanish-jain-324284271/' },
           { name: 'GitHub', href: 'https://github.com/tanishjain93133-hub' },
-          { name: 'Instagram', href: 'https://www.instagram.com/tanish__.6' }
+          { name: 'Instagram', href: 'https://www.instagram.com/tanish__.6' },
+          { name: 'WhatsApp', href: 'https://wa.me/917049845357' }
         ].map((social) => (
           <a 
             key={social.name}

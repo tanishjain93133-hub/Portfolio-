@@ -386,6 +386,9 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }: HyperspeedProps)
           antialias: false,
           alpha: true
         });
+        if (!this.renderer || !this.renderer.getContext()) {
+          throw new Error('WebGL context is not available');
+        }
         this.renderer.setSize(initW, initH, false);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         
@@ -1204,9 +1207,27 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }: HyperspeedProps)
     };
     options.distortion = distortions[options.distortion];
 
-    const myApp = new App(container, options);
-    appRef.current = myApp;
-    myApp.loadAssets().then(myApp.init);
+    let myApp: any = null;
+    try {
+      // Feature-detection to prevent three.js and postprocessing composer crashes
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) {
+        throw new Error('WebGL is not supported in this browser/environment.');
+      }
+
+      myApp = new App(container, options);
+      appRef.current = myApp;
+      myApp.loadAssets().then(() => {
+        if (myApp.disposed) return;
+        myApp.init();
+      });
+    } catch (e) {
+      console.warn('Hyperspeed WebGL initialization failed, falling back gracefully:', e);
+      if (container) {
+        container.style.background = 'radial-gradient(circle at center, #111 0%, #000 100%)';
+      }
+    }
 
     return () => {
       if (appRef.current) {
