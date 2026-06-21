@@ -339,7 +339,7 @@ export default function Certificates() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               onClick={() => setSelectedCert(cert)}
-              className="group cursor-none p-12 border-r border-b border-white/5 hover:bg-primary/5 transition-all"
+              className="group cursor-pointer p-12 border-r border-b border-white/5 hover:bg-primary/5 transition-all"
             >
               <div className="relative aspect-[4/3] overflow-hidden mb-8 border border-white/5">
                 {cert.isDigitalCert ? (
@@ -357,7 +357,6 @@ export default function Certificates() {
                     src={cert.image} 
                     alt={cert.title}
                     className="w-full h-full object-contain bg-zinc-900/60 p-2 grayscale group-hover:grayscale-0 transition-all duration-700"
-                    referrerPolicy="no-referrer"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = `https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop`;
@@ -440,7 +439,6 @@ export default function Certificates() {
                       src={selectedCert.image} 
                       alt={selectedCert.title} 
                       className="max-w-full max-h-full border border-white/10 shadow-2xl"
-                      referrerPolicy="no-referrer"
                     />
                   )}
                 </div>

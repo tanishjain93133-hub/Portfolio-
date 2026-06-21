@@ -330,7 +330,6 @@ const About = () => {
                 src="/images/portfolio/profile.jpg" 
                 alt="Tanish Jain" 
                 className="w-full h-auto rounded-xl grayscale hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100 shadow-lg"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl" />
               
@@ -747,7 +746,6 @@ const Projects = () => {
                     src={project.image} 
                     alt={project.title}
                     className="w-full h-full object-cover transition-all duration-700"
-                    referrerPolicy="no-referrer"
                   />
                   
                   {/* Visual Overlay Design */}
@@ -807,7 +805,7 @@ const Projects = () => {
                           e.stopPropagation();
                           setActiveModalProject(project);
                         }}
-                        className="px-4 py-2.5 bg-primary hover:bg-primary/95 text-black text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 cursor-none"
+                        className="px-4 py-2.5 bg-primary hover:bg-primary/95 text-black text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 "
                       >
                         <Sparkles size={13} className="animate-spin duration-3000" />
                         View Project
@@ -817,7 +815,7 @@ const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 cursor-none"
+                        className="px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 "
                       >
                         <Github size={13} />
                         GitHub
@@ -828,7 +826,7 @@ const Projects = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 cursor-none"
+                          className="px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 "
                         >
                           <ExternalLink size={13} className="text-primary" />
                           Live Demo
@@ -895,7 +893,7 @@ const Projects = () => {
               </div>
               <button 
                 onClick={() => setActiveModalProject(null)}
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/5 transition-all cursor-none"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/5 transition-all "
               >
                 <X size={18} />
               </button>
@@ -927,7 +925,7 @@ const Projects = () => {
                                 setActiveImageIdx(0); // reset active render index
                               }}
                               className={cn(
-                                "py-2 px-2 text-[10px] font-semibold rounded-md transition-all uppercase tracking-widest cursor-none border text-center",
+                                "py-2 px-2 text-[10px] font-semibold rounded-md transition-all uppercase tracking-widest  border text-center",
                                 isSel 
                                   ? "bg-primary border-primary text-black" 
                                   : "bg-white/5 border-white/5 text-white/60 hover:text-white hover:bg-white/10"
@@ -959,7 +957,7 @@ const Projects = () => {
                         {/* Interactive Play Toggle */}
                         <button
                           onClick={() => setIsPlayingVideo(!isPlayingVideo)}
-                          className="px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white border border-white/15 text-[9px] font-bold tracking-wider uppercase rounded-md cursor-none transition-all w-full"
+                          className="px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white border border-white/15 text-[9px] font-bold tracking-wider uppercase rounded-md  transition-all w-full"
                         >
                           {isPlayingVideo ? "⏸ Pause Walkthrough" : "▶ Play Simulated walkthrough"}
                         </button>
@@ -1044,7 +1042,6 @@ const Projects = () => {
                               src={currentRender.image}
                               alt={currentRender.title}
                               className="w-full h-full object-cover"
-                              referrerPolicy="no-referrer"
                             />
                             {/* Overlay descriptive ribbon */}
                             <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-5">
@@ -1094,7 +1091,7 @@ const Projects = () => {
                                 key={idx}
                                 onClick={() => setActiveImageIdx(idx)}
                                 className={cn(
-                                  "w-20 md:w-24 aspect-[4/3] rounded-lg overflow-hidden border transition-all cursor-none bg-zinc-900",
+                                  "w-20 md:w-24 aspect-[4/3] rounded-lg overflow-hidden border transition-all  bg-zinc-900",
                                   isAct ? "border-primary ring-2 ring-primary/20" : "border-white/10 hover:border-white/20"
                                 )}
                               >
@@ -1102,7 +1099,6 @@ const Projects = () => {
                                   src={item.image} 
                                   alt={item.title} 
                                   className="w-full h-full object-cover select-none pointer-events-none" 
-                                  referrerPolicy="no-referrer"
                                 />
                               </button>
                             );
@@ -1150,7 +1146,7 @@ const Projects = () => {
                                 setTimeout(() => setIsAnalyzingResume(false), 600);
                               }}
                               className={cn(
-                                "py-2.5 px-3 text-[10px] font-mono rounded-lg transition-all cursor-none border w-full flex items-center justify-between",
+                                "py-2.5 px-3 text-[10px] font-mono rounded-lg transition-all  border w-full flex items-center justify-between",
                                 isSel 
                                   ? "bg-primary border-primary text-black font-bold" 
                                   : "bg-white/5 border-white/5 text-white/60 hover:text-white hover:bg-white/10"
@@ -1188,7 +1184,7 @@ const Projects = () => {
                           }, 700);
                         }}
                         className={cn(
-                          "w-full py-3 text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-none border",
+                          "w-full py-3 text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center justify-center gap-2  border",
                           atsScoreBoost 
                             ? "bg-red-500/10 border-red-500/20 text-red-500 hover:bg-red-500/15"
                             : "bg-primary hover:bg-primary/95 text-black border-transparent"
@@ -1430,7 +1426,7 @@ const Projects = () => {
                             }, 800);
                           }}
                           disabled={isAnalyzingSenti || !newSentiComment.trim()}
-                          className="w-full py-3 px-4 bg-primary hover:bg-primary/95 text-black disabled:bg-white/5 disabled:text-white/40 font-bold text-xs uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2 cursor-none"
+                          className="w-full py-3 px-4 bg-primary hover:bg-primary/95 text-black disabled:bg-white/5 disabled:text-white/40 font-bold text-xs uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2 "
                         >
                           {isAnalyzingSenti ? (
                             <>
@@ -1460,7 +1456,7 @@ const Projects = () => {
                               key={opt.value}
                               onClick={() => setSentiFilter(opt.value as any)}
                               className={cn(
-                                "py-2 px-1 text-[10px] font-bold rounded-lg transition-all uppercase tracking-wider cursor-none border",
+                                "py-2 px-1 text-[10px] font-bold rounded-lg transition-all uppercase tracking-wider  border",
                                 sentiFilter === opt.value
                                   ? "bg-primary border-primary text-black"
                                   : "bg-white/5 border-white/5 text-white/60 hover:text-white hover:bg-white/10"
@@ -1555,7 +1551,7 @@ const Projects = () => {
                                 <motion.div 
                                   initial={{ width: 0 }} 
                                   animate={{ width: `${posPct}%` }}
-                                  className="bg-green-500 h-full relative group cursor-none"
+                                  className="bg-green-500 h-full relative group "
                                 >
                                   <div className="absolute inset-0 bg-white/20 animate-pulse" />
                                 </motion.div>
@@ -1564,14 +1560,14 @@ const Projects = () => {
                                 <motion.div 
                                   initial={{ width: 0 }} 
                                   animate={{ width: `${neuPct}%` }}
-                                  className="bg-zinc-500 h-full cursor-none"
+                                  className="bg-zinc-500 h-full "
                                 />
                               )}
                               {negPct > 0 && (
                                 <motion.div 
                                   initial={{ width: 0 }} 
                                   animate={{ width: `${negPct}%` }}
-                                  className="bg-red-500 h-full relative group cursor-none"
+                                  className="bg-red-500 h-full relative group "
                                 >
                                   <div className="absolute inset-0 bg-white/10 animate-pulse" />
                                 </motion.div>
@@ -1693,7 +1689,7 @@ const Projects = () => {
                               key={region}
                               onClick={() => setSelectedRegion(region === "All" ? "All Regions" : region)}
                               className={cn(
-                                "py-2 px-1 text-xs font-semibold rounded-md transition-all uppercase tracking-widest cursor-none border",
+                                "py-2 px-1 text-xs font-semibold rounded-md transition-all uppercase tracking-widest  border",
                                 isSelected 
                                   ? "bg-primary border-primary text-black" 
                                   : "bg-white/5 border-white/5 text-white/60 hover:text-white hover:bg-white/10"
@@ -1733,7 +1729,7 @@ const Projects = () => {
                         max="99" 
                         value={confidenceInterval}
                         onChange={(e) => setConfidenceInterval(Number(e.target.value))}
-                        className="w-full accent-primary bg-white/15 h-1 rounded-sm appearance-none outline-none cursor-none"
+                        className="w-full accent-primary bg-white/15 h-1 rounded-sm appearance-none outline-none "
                       />
                     </div>
 
@@ -1741,7 +1737,7 @@ const Projects = () => {
                     <button
                       onClick={handleRunForecast}
                       disabled={isSimulating}
-                      className="w-full py-3 bg-primary hover:bg-primary/95 text-black font-bold uppercase tracking-widest text-xs rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-none disabled:opacity-50"
+                      className="w-full py-3 bg-primary hover:bg-primary/95 text-black font-bold uppercase tracking-widest text-xs rounded-xl transition-all duration-300 flex items-center justify-center gap-2  disabled:opacity-50"
                     >
                       <Sparkles size={14} className={isSimulating ? "animate-spin" : ""} />
                       {isSimulating ? "Recalculating..." : "Run AI Forecast Model"}
@@ -1857,7 +1853,7 @@ const Projects = () => {
                     href={activeModalProject.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-extrabold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center gap-2 cursor-none"
+                    className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-extrabold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center gap-2 "
                   >
                     <Github size={14} />
                     GitHub Repository
@@ -1868,7 +1864,7 @@ const Projects = () => {
                     href={activeModalProject.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 py-2.5 bg-primary hover:bg-primary/95 text-black text-xs font-extrabold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center gap-2 cursor-none"
+                    className="px-5 py-2.5 bg-primary hover:bg-primary/95 text-black text-xs font-extrabold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center gap-2 "
                   >
                     <ExternalLink size={14} />
                     View Project
@@ -2024,49 +2020,6 @@ const Footer = () => {
   );
 };
 
-const CustomCursor = () => {
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
-  const [isPointer, setIsPointer] = useState(false);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      const target = e.target as HTMLElement;
-      setIsPointer(window.getComputedStyle(target).cursor === 'pointer');
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [cursorX, cursorY]);
-
-  return (
-    <>
-      <motion.div
-        style={{ 
-          x: cursorX, 
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
-          scale: isPointer ? 0.5 : 1
-        }}
-        className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-[9999] hidden md:block"
-      />
-      <motion.div
-        style={{ 
-          x: cursorX, 
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
-          scale: isPointer ? 1.5 : 1,
-        }}
-        transition={{ type: 'spring', damping: 25, stiffness: 250, mass: 0.5 }}
-        className="fixed top-0 left-0 w-8 h-8 border border-primary/20 rounded-full pointer-events-none z-[9998] hidden md:block"
-      />
-    </>
-  );
-};
-
 const Preloader = () => {
   return (
     <motion.div
@@ -2135,7 +2088,6 @@ export default function App() {
   return (
     <div className="relative font-sans antialiased">
       <Preloader />
-      <CustomCursor />
       <BackToTop />
       
       {/* Progress Bar */}
