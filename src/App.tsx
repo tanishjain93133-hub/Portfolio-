@@ -65,7 +65,7 @@ const classifyComment = (text: string): { sentiment: 'positive' | 'neutral' | 'n
 
 // --- Components ---
 
-const Navbar = ({ activePage, setActivePage }: { activePage: string; setActivePage: (page: string) => void }) => {
+const Navbar = ({ activePage, setActivePage, activeSection = 'home' }: { activePage: string; setActivePage: (page: string) => void; activeSection?: string }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -85,19 +85,21 @@ const Navbar = ({ activePage, setActivePage }: { activePage: string; setActivePa
   ];
 
   const handleNavClick = (id: string) => {
-    if (id === 'certificates') {
-      setActivePage('certificates');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      setActivePage('home');
+    const targetHash = id === 'home' ? '' : '#' + id;
+    if (window.location.hash === targetHash) {
       if (id === 'home') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        setActivePage('home');
+      } else if (id === 'certificates') {
+        setActivePage('certificates');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        setTimeout(() => {
-          const el = document.getElementById(id);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        setActivePage('home');
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      window.location.hash = targetHash;
     }
     setIsMobileMenuOpen(false);
   };
@@ -129,7 +131,7 @@ const Navbar = ({ activePage, setActivePage }: { activePage: string; setActivePa
               transition={{ delay: i * 0.05 }}
               className={cn(
                 "text-[11px] uppercase tracking-[0.2em] font-bold transition-all hover:text-primary",
-                (activePage === 'certificates' && link.id === 'certificates') || (activePage === 'home' && link.id !== 'certificates' && link.id !== 'home')
+                (activePage === 'certificates' && link.id === 'certificates') || (activePage === 'home' && activeSection === link.id)
                   ? "text-primary" : "text-white/50"
               )}
             >
@@ -2074,6 +2076,7 @@ const BackToTop = () => {
 
 export default function App() {
   const [activePage, setActivePage] = useState('home');
+  const [activeSection, setActiveSection] = useState('home');
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -2082,7 +2085,61 @@ export default function App() {
   });
 
   useEffect(() => {
+    // Prevent scrolling while preloading initially
     document.body.style.overflow = 'hidden';
+    
+    // Safety fallback: ensure page is scrollable after 2.5 seconds regardless of animation callbacks
+    const timer = setTimeout(() => {
+      document.body.style.overflow = 'auto';
+    }, 2500);
+
+    // Synchronize active page view with the window location hash
+    const checkHash = () => {
+      const hash = window.location.hash;
+      if (hash === '#certificates') {
+        setActivePage('certificates');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setActivePage('home');
+        if (hash && hash !== '#home') {
+          const id = hash.replace('#', '');
+          setTimeout(() => {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 300);
+        }
+      }
+    };
+
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+
+    // Track active section via IntersectionObserver
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -30% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('hashchange', checkHash);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -2096,7 +2153,7 @@ export default function App() {
         style={{ scaleX }}
       />
 
-      <Navbar activePage={activePage} setActivePage={setActivePage} />
+      <Navbar activePage={activePage} setActivePage={setActivePage} activeSection={activeSection} />
       
       <main>
         {activePage === 'home' ? (
