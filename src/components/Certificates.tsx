@@ -169,6 +169,30 @@ export function DigitalCertificatePreview({ cert, isModal = false }: { cert: Cer
   );
 }
 
+const getGoogleDriveFallback = (src: string): string => {
+  const mapping: Record<string, string> = {
+    '/images/certificates/ai_fundamentals_badge.png': '1gCOnjxies8ystY_JIB_ggeRZ1LzurAQP',
+    '/images/certificates/advanced_digital_marketing.jpg': '1NzHQnyiVwvVxHWCbeTqge4HW9ITFCSai',
+    '/images/certificates/aws_academy.jpg': '1v7moLn3XrFf6AFKG2z0EIxznO9sRq3S6',
+    '/images/certificates/javascript_training.jpg': '1TKRnnFDjgZ8SKfWvC947xMMILbY43tch',
+    '/images/certificates/user_to_builder.jpg': '1uI3m0nrwckqQlap8ITzB13nx25_kEdaH',
+    '/images/certificates/python_gen_ai.jpg': '1Apu9NxZ-khPs5XZgalD2N-KJGSKqMvq7',
+    '/images/certificates/ai_agents.jpg': '1JXGd_-_lXbbxeA9ALnemqUKE9q2Dpmj5',
+    '/images/certificates/ai_fundamentals_cert.jpg': '1RmCKsjMAGQ9zr2OyYRfWyr17Ei2-HER9',
+    '/images/certificates/python101.jpg': '1H3XJ5fvmVmgW9ikA82et1XBCh1u_8g_A',
+    '/images/certificates/power_bi.jpg': '1w72oZh0GErBd0ZEO3dvdcnvb4SxC8QBn',
+    '/images/certificates/ai_tools_chatgpt.jpg': '1Yoo3ZsrEw0yyRPF7oLrb3_GsRAFXslwq',
+    '/images/certificates/excel_self_learning.jpg': '18P2xxIsJzl50nlEDx1uTuZuMdqV5jPhL',
+    '/images/certificates/narcotics_control.jpg': '1OFYznZZ_2scrbIhgDqr5sZ8sUsJcCWPH',
+  };
+  const cleanPath = '/' + src.replace(/^\/+/, '');
+  const id = mapping[src] || mapping[cleanPath];
+  if (id) {
+    return `https://lh3.googleusercontent.com/d/${id}`;
+  }
+  return src;
+};
+
 const certificates: Certificate[] = [
   {
     id: 12,
@@ -357,9 +381,15 @@ export default function Certificates() {
                     src={cert.image} 
                     alt={cert.title}
                     className="w-full h-full object-contain bg-zinc-900/60 p-2 grayscale group-hover:grayscale-0 transition-all duration-700"
+                    referrerPolicy="no-referrer"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = `https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop`;
+                      if (!target.src.includes('googleusercontent.com')) {
+                        target.src = getGoogleDriveFallback(cert.image);
+                        target.referrerPolicy = "no-referrer";
+                      } else {
+                        target.src = `https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop`;
+                      }
                     }}
                   />
                 )}
@@ -439,6 +469,14 @@ export default function Certificates() {
                       src={selectedCert.image} 
                       alt={selectedCert.title} 
                       className="max-w-full max-h-full border border-white/10 shadow-2xl"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (!target.src.includes('googleusercontent.com')) {
+                          target.src = getGoogleDriveFallback(selectedCert.image);
+                          target.referrerPolicy = "no-referrer";
+                        }
+                      }}
                     />
                   )}
                 </div>
