@@ -4,7 +4,7 @@ import {
   Menu, X, Github, Linkedin, Twitter, ArrowUp, Instagram, MessageCircle,
   TrendingUp, Layout, BarChart3, Video, Cpu, Search, Code, PieChart,
   Check, Sparkles, ExternalLink, Sliders, Database, ArrowUpRight,
-  FileText, Upload, RefreshCw
+  FileText, Upload, RefreshCw, Calendar, Briefcase
 } from 'lucide-react';
 import { Typewriter } from 'react-simple-typewriter';
 import Hyperspeed from './components/Hyperspeed';
@@ -94,6 +94,7 @@ const Navbar = ({ activePage, setActivePage, activeSection = 'home' }: { activeP
     { name: 'Home', href: '#', id: 'home' },
     { name: 'About', href: '#about', id: 'about' },
     { name: 'Skills', href: '#skills', id: 'skills' },
+    { name: 'Experience', href: '#experience', id: 'experience' },
     { name: 'Projects', href: '#projects', id: 'projects' },
     { name: 'Certificates', href: '#certificates', id: 'certificates' },
     { name: 'Contact', href: '#contact', id: 'contact' },
@@ -546,6 +547,216 @@ const Skills = () => {
   );
 };
 
+const Experience = () => {
+  const experiences = [
+    {
+      company: "DSA – Dhwanish Shah Architects & Interiors",
+      role: "Digital Marketing Executive / Social Media Executive",
+      period: "December 2025 – Present",
+      status: "Present / Ongoing",
+      badge: "Active",
+      tagline: "Architecture & Interior Design",
+      description: "Leading social media platforms, creative video editing, and digital marketing strategy to amplify architectural project visibility and audience engagement.",
+      highlights: [
+        "Manage social media platforms and content strategy",
+        "Create and manage reels, posts, captions, and social media calendars",
+        "Handle video editing and creative content",
+        "Support digital marketing, SEO, and online brand promotion",
+        "Work on website content and digital presence",
+        "Support lead generation and audience engagement"
+      ],
+      skills: [
+        "Digital Marketing",
+        "Social Media Strategy",
+        "Reels & Video Editing",
+        "Social Media Calendars",
+        "SEO & Online Promotion",
+        "Website Content",
+        "Lead Generation",
+        "Audience Engagement"
+      ]
+    },
+    {
+      company: "IBM SkillsBuild",
+      role: "AI / Digital Skills Intern",
+      period: "15-Day Remote Internship",
+      status: "Completed",
+      badge: "Internship",
+      tagline: "Artificial Intelligence & Digital Enablement",
+      description: "Completed a 15-day remote internship focused on developing practical AI and digital skills through IBM SkillsBuild.",
+      highlights: [
+        "Completed intensive training curriculum focused on practical AI concepts, neural networks, and digital skills",
+        "Applied data-backed techniques and automated AI workflows to solve real-world problem statements",
+        "Explored agentic AI frameworks, machine learning models, and modern analytical toolsets",
+        "Earned verified professional credentials confirming core artificial intelligence competency"
+      ],
+      skills: [
+        "Artificial Intelligence",
+        "AI Fundamentals",
+        "Digital Skills",
+        "Machine Learning Concepts",
+        "Workflow Automation",
+        "Data Analytics",
+        "Prompt Engineering"
+      ]
+    },
+    {
+      company: "Achira B.K. Shah",
+      role: "Social Media & Digital Marketing",
+      period: "July 2026 – Present",
+      status: "Present / Active Role",
+      badge: "Current",
+      tagline: "Fashion & Retail Couture",
+      description: "Managing social media presence, content creation, reels, social media calendars, and digital marketing activities to strengthen brand visibility and audience engagement.",
+      highlights: [
+        "Managing brand social media presence and visual storytelling across digital platforms",
+        "Conceptualizing and creating engaging Instagram Reels and multimedia campaigns",
+        "Developing structured social media calendars for consistent brand messaging",
+        "Executing targeted digital marketing initiatives to expand reach and customer engagement"
+      ],
+      skills: [
+        "Social Media Presence",
+        "Content Creation",
+        "Instagram Reels",
+        "Social Media Calendars",
+        "Digital Marketing",
+        "Brand Visibility",
+        "Audience Engagement",
+        "Campaign Strategy"
+      ]
+    }
+  ];
+
+  return (
+    <section id="experience" className="py-32 bg-black relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-primary/5 blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="text-primary font-bold tracking-[0.4em] uppercase text-[10px] mb-4 block">Work History</span>
+            <h2 className="text-6xl font-display font-bold uppercase tracking-tighter leading-none">
+              WORK <span className="text-outline">EXPERIENCE</span>
+            </h2>
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-white/40 max-w-md text-base font-light leading-relaxed"
+          >
+            A track record of driving digital marketing growth, social media execution, and applied AI problem-solving.
+          </motion.p>
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-8">
+          {experiences.map((exp, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="relative p-8 md:p-12 bg-zinc-900/40 border border-white/10 hover:border-primary/30 rounded-3xl transition-all duration-500 group overflow-hidden shadow-2xl"
+            >
+              {/* Top Accent Line */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              {/* Large Faded Index Number */}
+              <div className="absolute top-6 right-8 text-8xl font-display font-black text-white/[0.02] leading-none pointer-events-none group-hover:text-primary/[0.04] transition-colors duration-700">
+                0{i + 1}
+              </div>
+
+              {/* Subtle hover gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+              <div className="relative z-10">
+                {/* Header Row */}
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-8 border-b border-white/10">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <span className="px-3 py-1 bg-primary/10 border border-primary/30 text-primary text-[10px] font-mono font-bold uppercase tracking-widest rounded-full flex items-center gap-1.5">
+                        {exp.status.includes('Present') && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                        )}
+                        {exp.status}
+                      </span>
+                      <span className="text-white/40 text-xs font-mono tracking-wider">
+                        {exp.tagline}
+                      </span>
+                    </div>
+
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-white group-hover:text-primary transition-colors tracking-tight">
+                      {exp.company}
+                    </h3>
+                    <div className="text-lg text-primary/90 font-medium tracking-wide mt-1">
+                      {exp.role}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-xs md:text-sm font-mono tracking-wider text-white/70 bg-white/5 px-4 py-2 rounded-xl border border-white/5 self-start shrink-0">
+                    <Calendar size={14} className="text-primary" />
+                    <span>{exp.period}</span>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="mt-8 space-y-6">
+                  <p className="text-white/80 text-base md:text-lg font-light leading-relaxed">
+                    “{exp.description}”
+                  </p>
+
+                  {/* Highlights Grid */}
+                  <div className="pt-2">
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 block mb-4">
+                      Key Highlights & Responsibilities
+                    </span>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {exp.highlights.map((item, hIdx) => (
+                        <div key={hIdx} className="flex items-start gap-3 text-sm text-white/70">
+                          <span className="w-5 h-5 rounded-md bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xs shrink-0 mt-0.5">
+                            ✓
+                          </span>
+                          <span className="leading-snug">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Skills Pills */}
+                  <div className="pt-4 border-t border-white/5">
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 block mb-3">
+                      Core Areas & Competencies
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.skills.map((skill, sIdx) => (
+                        <span
+                          key={sIdx}
+                          className="px-3 py-1 bg-white/5 hover:bg-primary/10 border border-white/10 hover:border-primary/30 text-white/70 hover:text-primary text-xs font-mono rounded-lg transition-colors"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Projects = () => {
   const [activeModalProject, setActiveModalProject] = useState<any | null>(null);
 
@@ -637,6 +848,29 @@ const Projects = () => {
   };
 
   const projects = [
+    {
+      title: "PR Material House",
+      category: "Full-Stack Web Development / E-Commerce",
+      tagline: "Full-Stack Building Material E-Commerce Platform",
+      role: "Full-Stack Developer",
+      image: "/images/portfolio/pr_material_house.svg",
+      year: "2026",
+      description: "Designed and developed a complete building-material e-commerce website, handling both frontend and backend development. The platform includes product categories, product management, pricing, user interactions, and order-related functionality.",
+      features: [
+        "Complete E-Commerce Architecture",
+        "Product Catalog & Category Filters",
+        "Dynamic Pricing & Quote Requests",
+        "User Interaction & Ordering Flow",
+        "Fast Responsive UI/UX",
+        "Backend Product Management",
+        "WhatsApp Direct Inquiries",
+        "SEO & High Performance"
+      ],
+      techStack: ["React", "JavaScript", "HTML5", "CSS3", "Full-Stack", "E-Commerce", "Vercel"],
+      link: "https://prmaterialhouse1.vercel.app/",
+      demo: "https://prmaterialhouse1.vercel.app/",
+      isInteractive: false
+    },
     {
       title: "DSA – Dhwanish Shah Architects Website",
       category: "Architecture & Design",
@@ -744,7 +978,6 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-2 gap-x-12 gap-y-24">
           {(projects as any[]).map((project, i) => {
-            const hasExtraDetails = !!project.isInteractive;
             const CardWrapper = motion.div;
 
             return (
@@ -757,12 +990,11 @@ const Projects = () => {
                 onClick={() => {
                   if (project.isInteractive) {
                     setActiveModalProject(project);
+                  } else if (project.link) {
+                    window.open(project.link, '_blank', 'noopener,noreferrer');
                   }
                 }}
-                className={cn(
-                  "group flex flex-col h-full relative text-left cursor-pointer",
-                  hasExtraDetails ? "p-8 bg-zinc-900/10 border border-white/5 rounded-3xl backdrop-blur-md hover:border-primary/20 hover:shadow-[0_0_40px_rgba(255,122,0,0.06)] transition-all duration-300" : ""
-                )}
+                className="group flex flex-col h-full relative text-left cursor-pointer p-8 bg-zinc-900/10 border border-white/5 rounded-3xl backdrop-blur-md hover:border-primary/20 hover:shadow-[0_0_40px_rgba(255,122,0,0.06)] transition-all duration-300"
               >
                 <div className="relative overflow-hidden mb-8 aspect-[16/10] bg-zinc-900/50 border border-white/5 flex items-center justify-center rounded-2xl">
                   <motion.img 
@@ -785,14 +1017,19 @@ const Projects = () => {
                   <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   
                   <div className="absolute top-6 right-6 bg-black/75 backdrop-blur-md px-4 py-2 text-[10px] font-bold tracking-widest uppercase text-white border border-white/10 z-10 rounded-sm">
-                    {project.isInteractive ? "ACTIVE DEMO" : project.year}
+                    {project.isInteractive ? "ACTIVE DEMO" : (project.year || "LIVE PROJECT")}
                   </div>
                 </div>
                 
                 <div className="flex flex-col flex-1 justify-between">
                   <div className="flex-1">
                     <span className="text-primary text-[10px] font-bold uppercase tracking-widest mb-2 block">{project.category}</span>
-                    <h3 className="text-3xl font-display font-bold group-hover:text-primary transition-colors mb-4 leading-tight">{project.title}</h3>
+                    <h3 className="text-3xl font-display font-bold group-hover:text-primary transition-colors mb-2 leading-tight">{project.title}</h3>
+                    {project.tagline && (
+                      <p className="text-white/70 text-xs font-mono tracking-wide mb-3">
+                        {project.tagline}
+                      </p>
+                    )}
                     <p className="text-white/40 text-sm leading-relaxed max-w-xl group-hover:text-white/60 transition-colors mb-6">
                       {project.description}
                     </p>
@@ -868,8 +1105,20 @@ const Projects = () => {
                     </div>
                   ) : (
                     project.link && (
-                      <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:border-primary shrink-0 transition-all duration-300 translate-y-2">
-                        <ArrowUp className="rotate-45 text-white group-hover:text-black transition-colors" size={20} />
+                      <div className="flex items-center justify-between mt-4 pt-6 border-t border-white/5 w-full">
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="px-4 py-2.5 bg-primary hover:bg-primary/95 text-black text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-2 shadow-lg"
+                        >
+                          <ExternalLink size={13} />
+                          Open Live Website
+                        </a>
+                        <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:border-primary shrink-0 transition-all duration-300">
+                          <ArrowUp className="rotate-45 text-white group-hover:text-black transition-colors" size={18} />
+                        </div>
                       </div>
                     )
                   )}
@@ -2160,7 +2409,7 @@ export default function App() {
       });
     }, observerOptions);
 
-    const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+    const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -2192,6 +2441,7 @@ export default function App() {
             <Hero />
             <About />
             <Skills />
+            <Experience />
             <Projects />
             <Contact />
           </>

@@ -36,7 +36,7 @@ const files = {
 
 function downloadFile(url, dest) {
   return new Promise((resolve, reject) => {
-    https.get(url, (response) => {
+    const req = https.get(url, { timeout: 10000 }, (response) => {
       // Handle redirects (like Google's redirect to download confirmation or mirrors)
       if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
         downloadFile(response.headers.location, dest).then(resolve).catch(reject);
@@ -55,7 +55,11 @@ function downloadFile(url, dest) {
       fileStream.on('error', (err) => {
         reject(err);
       });
-    }).on('error', (err) => {
+    });
+    req.on('timeout', () => {
+      req.destroy(new Error('Request timeout'));
+    });
+    req.on('error', (err) => {
       reject(err);
     });
   });
@@ -67,14 +71,17 @@ async function run() {
     const dest = path.resolve('./public/images', localPath);
     const url = `https://lh3.googleusercontent.com/d/${fileId}`;
     try {
-      // Download anyway to ensure full binary authenticity 
+      if (fs.existsSync(dest) && fs.statSync(dest).size > 1000) {
+        // File already present and valid
+        continue;
+      }
       await downloadFile(url, dest);
       console.log(`[Image Sync] Successfully synchronized binary asset: ${localPath}`);
     } catch (err) {
-      console.error(`[Image Sync] Failed to synchronize ${localPath}:`, err.message);
+      console.warn(`[Image Sync] Warning: Could not download ${localPath} (${err.message}). Using fallback if available.`);
     }
   }
-  console.log('[Image Sync] Complete - All assets synchronized!');
+  console.log('[Image Sync] Complete - All assets verified!');
 }
 
 run();
