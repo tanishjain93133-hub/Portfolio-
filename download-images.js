@@ -28,7 +28,6 @@ const files = {
   'certificates/ai_tools_chatgpt.jpg': '1Yoo3ZsrEw0yyRPF7oLrb3_GsRAFXslwq',
   'certificates/excel_self_learning.jpg': '18P2xxIsJzl50nlEDx1uTuZuMdqV5jPhL',
   'certificates/narcotics_control.jpg': '1OFYznZZ_2scrbIhgDqr5sZ8sUsJcCWPH',
-  'portfolio/profile.jpg': '1mUfUWnG4ZWVFnxgOahSTXq_cJA2DGSh5',
   'portfolio/dsa_architects.jpg': '1vv81q-n1jOzi1X9IcHI3sWcMqfy4PIBQ',
   'portfolio/sales_vision.jpg': '1tfmEw3WvATPTSo7FCgHNJDFhcKehQMvL',
   'portfolio/insta_senti.jpg': '1bXejSKeByBVi72knDcNOumnJbtUUO1k_'

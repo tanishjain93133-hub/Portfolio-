@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
-import { X, ExternalLink, Award, Calendar, Building2 } from 'lucide-react';
+import { X, ExternalLink, Award, Calendar, Building2, FileText, CheckCircle, ShieldCheck } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface Certificate {
@@ -12,12 +12,14 @@ interface Certificate {
   image: string;
   category: string;
   verifyUrl?: string;
+  pdfUrl?: string;
   isDigitalCert?: boolean;
   certCode?: string;
   authority?: string;
   completionDate?: string;
   hours?: string;
   isBadgeLayout?: boolean;
+  credentialId?: string;
 }
 
 // Beautiful CSS/SVG-based interactive digital certificate presentation component
@@ -193,7 +195,61 @@ const getGoogleDriveFallback = (src: string): string => {
   return src;
 };
 
+// Certificates array organized strictly as requested:
+// 1. IBM SkillsBuild Training Program (Position 1)
+// 2. Advanced Digital Marketing (Position 2 - DM)
+// 3. Basics of Data Science (Position 3 - Data Science)
+// 4+. Amazon Q Introduction, followed by the remaining certificates one by one
 const certificates: Certificate[] = [
+  {
+    id: 15,
+    title: "IBM SkillsBuild Training Program – AI Data Science & Agentic Systems",
+    organization: "IBM SkillsBuild | BharatCares",
+    date: "June 2026",
+    description: "Successfully completed the intensive 2-week 'IBM SkillsBuild Training Program - AI Data Science & Agentic Systems' in association with BharatCares, conducted from 1st June 2026 to 15th June 2026. Specialized in autonomous agentic workflows and advanced data science pipelines.",
+    image: "/images/certificates/ibm_skillsbuild_training.png",
+    category: "IBM SkillsBuild",
+    certCode: "Unique ID: IBMTPAI366",
+    credentialId: "IBMTPAI366",
+    authority: "CSR Programs, BharatCares & IBM SkillsBuild",
+    completionDate: "15th June 2026",
+    pdfUrl: "/assets/aistudio/Tanish_Jain__2-Week_IBM_SkillsBuild_Certificate_36da05d3.pdf"
+  },
+  {
+    id: 8,
+    title: "Advanced Digital Marketing Certification",
+    organization: "Maxcess DMI Institute",
+    date: "September 2025",
+    description: "Successfully completed advanced digital marketing certification, covering SEO, social media marketing, content strategy, performance advertising, and audience lead generation.",
+    image: "/images/certificates/advanced_digital_marketing.jpg",
+    category: "Digital Marketing"
+  },
+  {
+    id: 16,
+    title: "Basics of Data Science",
+    organization: "UniAthena & CIQ, UK",
+    date: "September 2026",
+    description: "Successfully completed Basics of Data Science course developed and delivered by UniAthena in partnership with Cambridge International Qualifications (CIQ), UK. Blockchain-verified certificate under Athena Global Education & FEDE.",
+    image: "/images/certificates/uniathena_basics_of_data_science.png",
+    category: "Data Science",
+    certCode: "Blockchain ID: 8246-1413-1968",
+    credentialId: "8246-1413-1968",
+    authority: "Cambridge International Qualifications, UK & UniAthena",
+    completionDate: "15, September 2026",
+    pdfUrl: "/assets/aistudio/Tanish_CR1061_certificate_17218e6e.pdf"
+  },
+  {
+    id: 17,
+    title: "Amazon Q Introduction",
+    organization: "AWS Training & Certification",
+    date: "July 2026",
+    description: "Completion Certificate awarded by AWS Training & Certification for completing the Amazon Q Introduction training, mastering generative AI assistant capabilities, prompt interactions, and developer productivity workflows on AWS.",
+    image: "/images/certificates/amazon_q_introduction.png",
+    category: "Cloud & AI",
+    authority: "Michelle Vaz, Director, AWS Training & Certification",
+    completionDate: "July 21, 2026",
+    pdfUrl: "/assets/aistudio/Amazon_Q_Introduction_certificate_cb5c0f1b.pdf"
+  },
   {
     id: 12,
     title: "Artificial Intelligence Fundamentals",
@@ -201,20 +257,11 @@ const certificates: Certificate[] = [
     date: "June 2026",
     description: "Earned professional credential confirming core competencies in Artificial Intelligence paradigms, neural networks, deep learning logic, and ethical AI deployment.",
     image: "/images/certificates/ai_fundamentals_badge.png",
-    category: "AI Fundamentals",
+    category: "IBM SkillsBuild",
     verifyUrl: "https://www.credly.com/badges/54f6652b-f04c-49f3-9462-bd01c70a09d1",
     isDigitalCert: false,
     isBadgeLayout: true,
     completionDate: "Jun 03, 2026"
-  },
-  {
-    id: 8,
-    title: "Advanced Digital Marketing Certification",
-    organization: "Maxcess DMI Institute",
-    date: "September 2025",
-    description: "Successfully completed advanced digital marketing certification, covering SEO, social media marketing, content strategy, and performance advertising.",
-    image: "/images/certificates/advanced_digital_marketing.jpg",
-    category: "Digital Marketing"
   },
   {
     id: 10,
@@ -241,7 +288,7 @@ const certificates: Certificate[] = [
     date: "June 2026",
     description: "Successfully completed the professional builder program, focusing on agentic workflows, advanced data science pipelines, and designing autonomous system architectures.",
     image: "/images/certificates/user_to_builder.jpg",
-    category: "AI & Data Science",
+    category: "IBM SkillsBuild",
     isDigitalCert: false,
     certCode: "PLAN-CD7F6D971CDF",
     authority: "Your Learning Builder - Plans system of record",
@@ -263,7 +310,7 @@ const certificates: Certificate[] = [
     date: "June 2026",
     description: "Rigorous certification covering execution frameworks for autonomous AI agents, multi-agent collaboration, goal decomposition, and structured prompt engineering templates.",
     image: "/images/certificates/ai_agents.jpg",
-    category: "AI Agents",
+    category: "IBM SkillsBuild",
     isDigitalCert: false,
     certCode: "ALM-COURSE_3825456",
     authority: "Adobe Learning Manager system of record",
@@ -277,7 +324,7 @@ const certificates: Certificate[] = [
     date: "June 2026",
     description: "Completed comprehensive technical training on foundational search algorithms, machine learning workflows, predictive analysis tools, and modern NLP capabilities.",
     image: "/images/certificates/ai_fundamentals_cert.jpg",
-    category: "AI Foundations",
+    category: "IBM SkillsBuild",
     isDigitalCert: false,
     certCode: "PLAN-7913EE1DB030",
     authority: "Your Learning Builder - Plans system of record",
@@ -332,6 +379,26 @@ const certificates: Certificate[] = [
 
 export default function Certificates() {
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
+
+  const categories = [
+    'All',
+    'IBM SkillsBuild',
+    'Digital Marketing',
+    'Data Science',
+    'Cloud & AI',
+    'Web & Code'
+  ];
+
+  const filteredCertificates = certificates.filter((cert) => {
+    if (activeCategory === 'All') return true;
+    if (activeCategory === 'IBM SkillsBuild') return cert.category === 'IBM SkillsBuild';
+    if (activeCategory === 'Digital Marketing') return cert.category === 'Digital Marketing';
+    if (activeCategory === 'Data Science') return cert.category === 'Data Science' || cert.category === 'Data Analysis' || cert.category === 'Data Visualization';
+    if (activeCategory === 'Cloud & AI') return cert.category === 'Cloud & AI' || cert.category === 'Cloud Computing' || cert.category === 'AI Tools';
+    if (activeCategory === 'Web & Code') return cert.category === 'Web Development' || cert.category === 'Python' || cert.category === 'AI & Python';
+    return true;
+  });
 
   return (
     <div className="min-h-screen pt-40 pb-24 relative bg-black">
@@ -343,88 +410,144 @@ export default function Certificates() {
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-24"
+          className="mb-16"
         >
           <span className="text-primary font-bold tracking-widest uppercase text-xs mb-4 block">Achievements</span>
           <h1 className="text-huge mb-8">
             MY <span className="text-outline">CERTIFICATES</span>
           </h1>
-          <p className="text-white/40 text-xl max-w-2xl font-light leading-relaxed">
-            A curated collection of professional certifications and specialized training that validate my expertise in digital strategy and technology.
+          <p className="text-white/40 text-xl max-w-2xl font-light leading-relaxed mb-8">
+            A curated collection of professional certifications and specialized training that validate my expertise in AI systems, digital strategy, and data science.
           </p>
+
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/5">
+            {categories.map((cat) => {
+              const count = certificates.filter((cert) => {
+                if (cat === 'All') return true;
+                if (cat === 'IBM SkillsBuild') return cert.category === 'IBM SkillsBuild';
+                if (cat === 'Digital Marketing') return cert.category === 'Digital Marketing';
+                if (cat === 'Data Science') return cert.category === 'Data Science' || cert.category === 'Data Analysis' || cert.category === 'Data Visualization';
+                if (cat === 'Cloud & AI') return cert.category === 'Cloud & AI' || cert.category === 'Cloud Computing' || cert.category === 'AI Tools';
+                if (cat === 'Web & Code') return cert.category === 'Web Development' || cert.category === 'Python' || cert.category === 'AI & Python';
+                return true;
+              }).length;
+
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={cn(
+                    "px-4 py-2 text-xs uppercase tracking-widest font-bold rounded-full transition-all duration-300 flex items-center gap-2",
+                    isActive
+                      ? "bg-primary text-black shadow-lg shadow-primary/20 scale-105"
+                      : "bg-white/5 text-white/60 hover:text-white hover:bg-white/10 border border-white/10"
+                  )}
+                >
+                  <span>{cat}</span>
+                  <span className={cn(
+                    "text-[10px] px-1.5 py-0.5 rounded-full font-mono",
+                    isActive ? "bg-black/20 text-black font-extrabold" : "bg-white/10 text-white/40"
+                  )}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/5">
-          {certificates.map((cert, i) => (
+          {filteredCertificates.map((cert, i) => (
             <motion.div
               key={cert.id}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.05 }}
               onClick={() => setSelectedCert(cert)}
-              className="group cursor-pointer p-12 border-r border-b border-white/5 hover:bg-primary/5 transition-all"
+              className="group cursor-pointer p-8 md:p-12 border-r border-b border-white/5 hover:bg-primary/5 transition-all flex flex-col justify-between"
             >
-              <div className="relative aspect-[4/3] overflow-hidden mb-8 border border-white/5">
-                {cert.isDigitalCert ? (
-                  <motion.div 
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-full p-2 flex items-center justify-center bg-zinc-950"
-                  >
-                    <DigitalCertificatePreview cert={cert} isModal={false} />
-                  </motion.div>
-                ) : (
-                  <motion.img 
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.8 }}
-                    src={cert.image} 
-                    alt={cert.title}
-                    className="w-full h-full object-contain bg-zinc-900/60 p-2 grayscale group-hover:grayscale-0 transition-all duration-700"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      if (!target.src.includes('googleusercontent.com')) {
-                        target.src = getGoogleDriveFallback(cert.image);
-                        target.referrerPolicy = "no-referrer";
-                      } else {
-                        target.src = `https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop`;
-                      }
-                    }}
-                  />
-                )}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-black/50 backdrop-blur-md border border-white/10 text-[9px] uppercase tracking-widest font-bold text-primary">
-                    {cert.category}
-                  </span>
+              <div>
+                <div className="relative aspect-[4/3] overflow-hidden mb-8 border border-white/5 rounded-lg bg-zinc-900/60">
+                  {cert.isDigitalCert ? (
+                    <motion.div 
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.5 }}
+                      className="w-full h-full p-2 flex items-center justify-center bg-zinc-950"
+                    >
+                      <DigitalCertificatePreview cert={cert} isModal={false} />
+                    </motion.div>
+                  ) : (
+                    <motion.img 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.8 }}
+                      src={cert.image} 
+                      alt={cert.title}
+                      className="w-full h-full object-contain p-2 grayscale group-hover:grayscale-0 transition-all duration-700"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (!target.src.includes('googleusercontent.com')) {
+                          target.src = getGoogleDriveFallback(cert.image);
+                          target.referrerPolicy = "no-referrer";
+                        } else {
+                          target.src = `https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop`;
+                        }
+                      }}
+                    />
+                  )}
+                  
+                  {/* Category Pill */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="px-3 py-1 bg-black/75 backdrop-blur-md border border-white/10 text-[9px] uppercase tracking-widest font-bold text-primary rounded-sm">
+                      {cert.category}
+                    </span>
+                  </div>
+
+                  {/* PDF indicator or Verified pill */}
+                  {cert.pdfUrl && (
+                    <div className="absolute top-4 right-4 z-10">
+                      <span className="px-2 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 text-[9px] uppercase tracking-wider font-bold text-primary rounded-sm flex items-center gap-1">
+                        <FileText size={10} />
+                        PDF
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-display font-bold group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+                    {cert.title}
+                  </h3>
+                  
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3 text-white/40 text-[11px] uppercase tracking-widest font-bold">
+                      <Building2 size={14} className="text-primary shrink-0" />
+                      <span className="truncate">{cert.organization}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/40 text-[11px] uppercase tracking-widest font-bold">
+                      <Calendar size={14} className="text-primary shrink-0" />
+                      <span>{cert.date}</span>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-white/40 line-clamp-2 leading-relaxed font-light">
+                    {cert.description}
+                  </p>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <h3 className="text-2xl font-display font-bold group-hover:text-primary transition-colors line-clamp-2">
-                  {cert.title}
-                </h3>
-                
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-3 text-white/40 text-[11px] uppercase tracking-widest font-bold">
-                    <Building2 size={14} className="text-primary" />
-                    <span>{cert.organization}</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-white/40 text-[11px] uppercase tracking-widest font-bold">
-                    <Calendar size={14} className="text-primary" />
-                    <span>{cert.date}</span>
-                  </div>
-                </div>
-
-                <p className="text-sm text-white/30 line-clamp-2 leading-relaxed font-light">
-                  {cert.description}
-                </p>
-
-                <div className="pt-4">
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/20 group-hover:text-primary transition-colors">
-                    View Details <span>→</span>
+              <div className="pt-6 mt-4 border-t border-white/5 flex items-center justify-between">
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/30 group-hover:text-primary transition-colors flex items-center gap-2">
+                  View Credential <span>→</span>
+                </span>
+                {cert.certCode && (
+                  <span className="text-[10px] font-mono text-white/30 truncate max-w-[150px]">
+                    {cert.credentialId || cert.certCode}
                   </span>
-                </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -441,7 +564,7 @@ export default function Certificates() {
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
           >
             <div 
-              className="absolute inset-0 bg-black/90" 
+              className="absolute inset-0 bg-black/90 backdrop-blur-sm" 
               onClick={() => setSelectedCert(null)}
             />
             
@@ -449,17 +572,17 @@ export default function Certificates() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
-              className="relative w-full max-w-6xl bg-black border border-white/10 overflow-hidden z-10"
+              className="relative w-full max-w-6xl bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden z-10 shadow-2xl"
             >
               <button 
                 onClick={() => setSelectedCert(null)}
-                className="absolute top-8 right-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-black z-20 transition-all"
+                className="absolute top-6 right-6 w-11 h-11 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-primary hover:text-black z-20 transition-all"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
 
               <div className="grid lg:grid-cols-5 h-full max-h-[90vh] overflow-y-auto">
-                <div className="lg:col-span-3 bg-white/5 flex items-center justify-center p-6 lg:p-12 border-r border-white/10">
+                <div className="lg:col-span-3 bg-black/50 flex items-center justify-center p-6 lg:p-12 border-r border-white/10">
                   {selectedCert.isDigitalCert ? (
                     <div className="w-full max-w-2xl">
                       <DigitalCertificatePreview cert={selectedCert} isModal={true} />
@@ -468,7 +591,7 @@ export default function Certificates() {
                     <img 
                       src={selectedCert.image} 
                       alt={selectedCert.title} 
-                      className="max-w-full max-h-full border border-white/10 shadow-2xl"
+                      className="max-w-full max-h-full rounded-lg border border-white/10 shadow-2xl object-contain"
                       referrerPolicy="no-referrer"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -481,56 +604,82 @@ export default function Certificates() {
                   )}
                 </div>
                 
-                <div className="lg:col-span-2 p-12 lg:p-20 flex flex-col justify-center">
-                  <div className="mb-12">
-                    <div className="w-16 h-16 border border-primary/30 flex items-center justify-center text-primary mb-8">
-                      <Award size={32} />
+                <div className="lg:col-span-2 p-8 lg:p-14 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-12 h-12 border border-primary/30 rounded-xl flex items-center justify-center text-primary bg-primary/5">
+                        <Award size={24} />
+                      </div>
+                      <span className="px-3 py-1 bg-primary/10 border border-primary/30 text-[10px] font-bold uppercase tracking-wider text-primary rounded-full">
+                        {selectedCert.category}
+                      </span>
                     </div>
-                    <h2 className="text-4xl font-display font-bold mb-6 leading-tight">{selectedCert.title}</h2>
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3 text-white/40 uppercase tracking-widest text-xs font-bold">
-                        <Building2 size={18} className="text-primary" />
+
+                    <h2 className="text-3xl lg:text-4xl font-display font-bold mb-6 leading-tight text-white">
+                      {selectedCert.title}
+                    </h2>
+
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center gap-3 text-white/50 uppercase tracking-widest text-xs font-bold">
+                        <Building2 size={16} className="text-primary shrink-0" />
                         <span>{selectedCert.organization}</span>
                       </div>
-                      <div className="flex items-center gap-3 text-white/40 uppercase tracking-widest text-xs font-bold">
-                        <Calendar size={18} className="text-primary" />
-                        <span>{selectedCert.date}</span>
+                      <div className="flex items-center gap-3 text-white/50 uppercase tracking-widest text-xs font-bold">
+                        <Calendar size={16} className="text-primary shrink-0" />
+                        <span>{selectedCert.completionDate || selectedCert.date}</span>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-8">
-                    <div>
-                      <h4 className="text-[10px] uppercase tracking-[0.3em] text-primary font-bold mb-4">Description</h4>
-                      <p className="text-white/60 leading-relaxed font-light text-lg">
+                    {selectedCert.certCode && (
+                      <div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-lg text-primary text-xs font-mono mb-6">
+                        <ShieldCheck size={16} className="text-primary shrink-0" />
+                        <span className="font-semibold">{selectedCert.certCode}</span>
+                      </div>
+                    )}
+
+                    {selectedCert.authority && (
+                      <p className="text-white/40 text-xs italic mb-6">
+                        Authorized by: {selectedCert.authority}
+                      </p>
+                    )}
+
+                    <div className="pt-6 border-t border-white/10">
+                      <h4 className="text-[10px] uppercase tracking-[0.3em] text-primary font-bold mb-3">About this Credential</h4>
+                      <p className="text-white/70 leading-relaxed font-light text-sm">
                         {selectedCert.description}
                       </p>
                     </div>
-                    
-                    <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4">
-                      {selectedCert.verifyUrl && (
-                        <a
-                          href={selectedCert.verifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 py-4 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary text-white hover:text-black text-center font-black uppercase tracking-[0.2em] text-xs transition-all duration-300 flex items-center justify-center gap-2"
-                        >
-                          <ExternalLink size={14} />
-                          Verify Credential
-                        </a>
-                      )}
-                      <button 
-                        onClick={() => setSelectedCert(null)}
-                        className={cn(
-                          "font-black uppercase tracking-[0.2em] text-xs transition-colors py-4",
-                          selectedCert.verifyUrl 
-                            ? "flex-1 bg-primary text-black hover:bg-white" 
-                            : "w-full py-6 bg-primary text-black text-sm tracking-[0.3em] hover:bg-white"
-                        )}
+                  </div>
+
+                  <div className="pt-8 mt-8 border-t border-white/10 flex flex-col gap-3">
+                    {selectedCert.pdfUrl && (
+                      <a
+                        href={selectedCert.pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3.5 bg-primary hover:bg-primary/90 text-black font-extrabold uppercase tracking-[0.15em] text-xs rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
                       >
-                        Close Preview
-                      </button>
-                    </div>
+                        <FileText size={15} />
+                        View Official PDF Document
+                      </a>
+                    )}
+                    {selectedCert.verifyUrl && (
+                      <a
+                        href={selectedCert.verifyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3.5 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary text-white hover:text-black font-extrabold uppercase tracking-[0.15em] text-xs rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
+                      >
+                        <ExternalLink size={15} />
+                        Verify on Issuer Site
+                      </a>
+                    )}
+                    <button 
+                      onClick={() => setSelectedCert(null)}
+                      className="w-full py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white/70 hover:text-white font-bold uppercase tracking-[0.2em] text-xs rounded-xl transition-colors"
+                    >
+                      Close Preview
+                    </button>
                   </div>
                 </div>
               </div>

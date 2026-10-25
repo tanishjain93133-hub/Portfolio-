@@ -65,7 +65,6 @@ const classifyComment = (text: string): { sentiment: 'positive' | 'neutral' | 'n
 
 const getGoogleDriveFallback = (src: string): string => {
   const mapping: Record<string, string> = {
-    '/images/portfolio/profile.jpg': '1mUfUWnG4ZWVFnxgOahSTXq_cJA2DGSh5',
     '/images/portfolio/dsa_architects.jpg': '1vv81q-n1jOzi1X9IcHI3sWcMqfy4PIBQ',
     '/images/portfolio/sales_vision.jpg': '1tfmEw3WvATPTSo7FCgHNJDFhcKehQMvL',
     '/images/portfolio/insta_senti.jpg': '1bXejSKeByBVi72knDcNOumnJbtUUO1k_'
@@ -345,15 +344,14 @@ const About = () => {
             <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative border border-white/10 p-4 bg-white/5 backdrop-blur-sm overflow-hidden rounded-2xl shadow-2xl group">
               <img 
-                src="/images/portfolio/profile.jpg" 
+                src="/images/portfolio/profile.png" 
                 alt="Tanish Jain" 
                 className="w-full h-auto rounded-xl grayscale hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100 shadow-lg"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  if (!target.src.includes('googleusercontent.com')) {
-                    target.src = getGoogleDriveFallback("/images/portfolio/profile.jpg");
-                    target.referrerPolicy = "no-referrer";
+                  if (!target.src.includes('file_0000000092c881f4a26b7c8b6810ebc7_056a138f.png')) {
+                    target.src = "/assets/aistudio/file_0000000092c881f4a26b7c8b6810ebc7_056a138f.png";
                   }
                 }}
               />
